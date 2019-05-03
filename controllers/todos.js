@@ -9,6 +9,7 @@ const {
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
+  debugger;
   getAllTodos().then(result=>{
     res.send(result);
     
@@ -32,10 +33,10 @@ router.post("/", (req, res, next) => {
 });
 
 router.delete('/',(req,res,next)=>{
-  console.log("trying to find id"+req.query.id);
+
   removeTodo(req.query.id)
   .then(result=>{
-    console.log(result);
+    res.append('Content-type','application/json')
     res.send(JSON.stringify(result));
 
   })
@@ -45,10 +46,10 @@ router.delete('/',(req,res,next)=>{
 })
 
 router.patch('/',(req,res,next)=>{
-  console.log("printing body",req.body);
+
   updateTodo(req.query.id,req.body)
   .then(result=>{
-    console.log("printing result",result)
+    res.append('Content-type','application/json')
     res.send(JSON.stringify(result));
   })
   .catch(err=>{

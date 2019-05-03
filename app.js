@@ -18,7 +18,9 @@ connectMongo.connect();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cors());
-app.use(logger('dev'));
+process.env.NODE_ENVIROMENT==='test' ? "" : app.use(logger('dev')) 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

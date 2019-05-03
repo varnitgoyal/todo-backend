@@ -1,7 +1,16 @@
 var mongoose = require('mongoose');
 var envConstants=require('./ENV_CONSTANTS');
 
-mongoose.connect(envConstants.url, {useNewUrlParser: true});
+
+if(process.env.NODE_ENVIROMENT==='test'){
+  mongoose.connect(envConstants.url_test, {useNewUrlParser: true});
+
+}
+else {
+  mongoose.connect(envConstants.url, {useNewUrlParser: true});
+
+
+}
 
 var db = mongoose.connection;
 function connect(){
@@ -14,7 +23,8 @@ db.once('open', function() {
 
 
 module.exports={
-    connect
+    connect,
+    db
 }
 
 
